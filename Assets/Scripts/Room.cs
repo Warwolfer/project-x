@@ -9,6 +9,7 @@ public class Room : MonoBehaviour
     void Start()
     {
         roomObjects = GetComponentsInChildren<SpriteRenderer>();
+        Hide();
     }
 
     // Update is called once per frame
@@ -16,6 +17,26 @@ public class Room : MonoBehaviour
     {
 
 
+    }
+
+    public void Hide()
+    {
+        Color color2 = roomObjects[0].color;
+        foreach (SpriteRenderer roomObject in roomObjects)
+        {
+            color2.a = 0;
+            roomObject.color = color2;
+        }
+    }
+
+    public void Show()
+    {
+        Color color2 = roomObjects[0].color;
+        foreach (SpriteRenderer roomObject in roomObjects)
+        {
+            color2.a = 1;
+            roomObject.color = color2;
+        }
     }
 
     public IEnumerator Fade()
