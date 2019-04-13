@@ -69,7 +69,6 @@ public class CharController : MonoBehaviour
 
         if (other.gameObject.CompareTag("Room"))
         {
-            Debug.Log(other.gameObject.name);
             StartCoroutine(other.GetComponent<Room>().FadeIn());
         }
     }
