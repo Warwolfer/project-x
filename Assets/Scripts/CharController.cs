@@ -13,6 +13,7 @@ public class CharController : MonoBehaviour
     bool isMoving = false;
     Collider itemInRange;
     public bool IsMoving { get => isMoving; set => isMoving = value; }
+    TMPro.TextMeshPro charText;
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +22,8 @@ public class CharController : MonoBehaviour
         forward.y = 0;
         forward = Vector3.Normalize(forward);
         right = Quaternion.Euler(new Vector3(0, 90, 0)) * forward;
+        charText = GetComponentInChildren<TMPro.TextMeshPro>();
+        charText.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -56,6 +59,7 @@ public class CharController : MonoBehaviour
         {
             GetComponentInChildren<Animator>().Play("KamaPick");
             itemInRange.gameObject.SetActive(false);
+            saySomething("Aku menemukan [" + itemInRange.gameObject.name + "]");
             itemInRange = null;
         }
     }
@@ -84,6 +88,18 @@ public class CharController : MonoBehaviour
         {
             StartCoroutine(other.GetComponent<Room>().Fade());
         }
+    }
+
+    public void saySomething(string text){
+        StartCoroutine(makeTextAppear(text, 2f));
+    }
+
+    IEnumerator makeTextAppear(string text, float duration){
+        charText.gameObject.SetActive(true);
+        charText.text = text;
+        yield return new WaitForSeconds(2f);
+        charText.gameObject.SetActive(false);
+        yield return null;
     }
 
 }

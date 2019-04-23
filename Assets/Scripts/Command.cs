@@ -75,7 +75,7 @@ public class LoadMainMenu : Command
         SceneManager.LoadSceneAsync("MainMenu");
     }
 
-    public override void Execute(CharController charController)
+    public override void Execute(CharController charController  )
     {
 
     }
